@@ -1,0 +1,17 @@
+{
+  "name": "sms",
+  "version": "1.0.0",
+  "description": "server for sms",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "huzhenjie",
+  "license": "ISC",
+  "dependencies": {
+    "co": "^4.6.0",
+    "express": "^4.16.3",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.0"
+  }
+}
