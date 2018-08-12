@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
-const Schedule = require('./lib/schedule/Schedule');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -12,6 +11,7 @@ app.use(bodyParser.json());
 global.Cache = require('../lib/cache/Cache');
 global.Util = require('../lib/common/Util');
 global.Res = require('../lib/common/Res');
+global.Schedule = require('node-schedule');
 global.Co = require('co');
 global.Config = require('./Config');
 
@@ -53,4 +53,4 @@ app.listen(Config.port, Config.host, function () {
     console.log(`Visit at http://${Config.host}:${Config.port}`);
 });
 
-Schedule.sync();
+require('../lib/schedule/Schedule').sync();
