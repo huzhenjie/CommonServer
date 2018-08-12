@@ -36,10 +36,28 @@ module.exports = {
                 console.log(`发送短信失败:${parsedBody.errmsg}`);
                 return Res.serverError(res, parsedBody.errmsg, parsedBody);
             }
-            Res.success(res);
+            Res.success(res)
         }).catch(err => {
             console.log(err);
-            return Res.serverError(res, err);
+            return Res.serverError(res, err)
         });
+    },
+    
+    verifySmsCode: function (req, res) {
+        const {tel, code} = req.body;
+        if (!tel || !code) {
+            return Res.paramError(res)
+        }
+
+        const cacheCode = Cache.getMemory(`sms_code:${tel}`);
+        if (!cacheCode) {
+            return Res.notFoundError(res)
+        }
+        
+        if (code != cacheCode) {
+            return Res.error(res, 400, '验证码错误')
+        }
+        
+        return Res.success(res)
     }
 };
