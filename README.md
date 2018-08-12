@@ -7,7 +7,7 @@ CommonServer
 | param | type | require | description |
 | :---: | :---: | :---: | --- |
 | appid | int | true | app id |
-| appkey | string | true | app string |
+| appkey | string | true | app key |
 
 
 # 获取短信接口
