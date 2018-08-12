@@ -4,10 +4,14 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
+const Schedule = require('./lib/schedule/Schedule');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+global.Cache = require('../lib/cache/Cache');
+global.Util = require('../lib/common/Util');
+global.Res = require('../lib/common/Res');
 global.Co = require('co');
 global.Config = require('./Config');
 
@@ -41,10 +45,12 @@ dbPool.authenticate()
 global.Sequelize = Sequelize;
 global.Conn = dbPool;
 
-app.use('/api/*', require('./interceptor/Auth'));
+app.use('/api/*', require('../lib/interceptor/Auth'));
 app.use('/api', require('./router/ApiRouter'));
 app.use('/', require('./router/UnAuthRouter'));
 
 app.listen(Config.port, Config.host, function () {
     console.log(`Visit at http://${Config.host}:${Config.port}`);
 });
+
+Schedule.sync();

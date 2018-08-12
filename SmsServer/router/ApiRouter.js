@@ -3,7 +3,9 @@
 const express = require('express');
 const router = express.Router();
 
-// const UserController = require('./../controller/UserController');
-// router.post('/login', UserController.login);
+const SmsController = require('../controller/SmsController');
+
+//curl -H 'appid: 1' -H 'appkey: 5651745861380' 'http://localhost:8083/api/sms'
+router.get('/sms', SmsController.send);
 
 module.exports = router;
