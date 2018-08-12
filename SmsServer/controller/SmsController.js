@@ -24,14 +24,12 @@ module.exports = {
         };
 
         Cache.addToMemory(`sms_code:${tel}`, code, 20 * 60 * 1000 + new Date().getTime()); // 20分钟过期
-        console.log(`https://yun.tim.qq.com/v3/tlssmssvr/sendsms?sdkappid=${Config.sms.tencent.appId}&random=${Util.rand()}`);
         rp({
             method: 'POST',
             uri: `https://yun.tim.qq.com/v3/tlssmssvr/sendsms?sdkappid=${Config.sms.tencent.appId}&random=${Util.rand()}`,
             body: body,
             json: true
         }).then(parsedBody => {
-            console.log(parsedBody);
             if (parsedBody.result != 0) {
                 console.log(`发送短信失败:${parsedBody.errmsg}`);
                 return Res.serverError(res, parsedBody.errmsg, parsedBody);
