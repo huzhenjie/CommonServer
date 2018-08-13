@@ -29,11 +29,13 @@ location /api/core/feedback {
 | param | type | require | description |
 | :---: | :---: | :---: | --- |
 | tel | string | true | 电话号码 |
+| ts | long | true | 13位时间戳 |
+| sign | string | true | md5("app_secret" + "ts" + "tel") |
 
 Sample
 
 ```
-curl -X GET -H 'appid: 1234' -H 'appkey: 12345678' 'https://host/api/core/sms?tel=17199916191'
+curl -H 'appid: 1' -H 'appkey: 5651745861380' 'http://localhost:8041/api/sms?tel=17199916191&ts=1534132120765&sign=CD660D8F4E63C7E2E729B28817A6EF9D'
 ```
 
 Response

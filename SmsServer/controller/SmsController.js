@@ -3,10 +3,16 @@ const md5 = require('md5');
 
 module.exports = {
     send: function (req, res) {
-        const appInfo = req.appInfo;
-        const tel = req.query.tel;
-        if (!tel) {
+        const {app_name, app_secret} = req.appInfo;
+        const {tel, ts, sign} = req.query;
+        if (!tel || !sign) {
             return Res.paramError(res)
+        }
+        
+        const currSign = md5(`${app_secret}${ts}${tel}`);
+        if (sign.toLowerCase() != currSign) {
+            console.log(`clientSign=${sign} serverSign=${currSign}`);
+            return Res.error(res, 400, '签名有误')
         }
 
         const code = Util.rand();
@@ -17,7 +23,7 @@ module.exports = {
             },
             type: '0', //0:普通短信;1:营销短信
             tpl_id: Config.sms.tencent.templateId,
-            params: [code, appInfo.app_name],
+            params: [code, app_name],
             sig: md5(`${Config.sms.tencent.appSecret}${tel}`),
             extend: '',
             ext: ''
