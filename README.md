@@ -70,7 +70,7 @@ Response
 Sample
 
 ```
-curl -X POST -H 'appid: 1' -H 'appkey: 5651745861380' -H "Content-type: application/json" -d '{"vc":"vc","vn":"vn","ch":"ch","content":"content","uid":"uid","ti:"contract","imgs":["http://baidu.com"]}' 'http://localhost:8042/api/feedback'
+curl -X POST -H 'appid: 1' -H 'appkey: 5651745861380' -H "Content-type: application/json" -d '{"vc":"vc","vn":"vn","ch":"ch","pt":"pt","content":"content","uid":"uid","title":"title","contract":"contract","imgs":["http://baidu.com"]}' 'http://localhost:8042/api/feedback'
 ```
 
 Response
