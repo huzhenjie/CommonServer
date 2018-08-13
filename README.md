@@ -9,6 +9,18 @@ CommonServer
 | appid | int | true | app id |
 | appkey | string | true | app key |
 
+# Config
+
+## nginx
+
+```
+location /api/core/sms {
+    proxy_pass http://localhost:8041/api/sms;
+}
+location /api/core/feedback {
+    proxy_pass http://localhost:8042/api/feedback;
+}
+```
 
 # 获取短信接口
 
@@ -65,7 +77,7 @@ Response
 | ch | string | false | 渠道，可填入 GooglePlay，AppStore，Official 等 |
 | vc | string | false | 版本号 |
 | vn | string | false | 版本名 |
-| imgs | array | false | 图片列表，如 \["http://xxx.cn/xxx.png","http://xxx.cn/xxx.png"\] |
+| imgs | array | false | 图片列表，如 \["http://xxx.cn/xxx.png","http://xxx.cn/xxx.png" \] |
 
 Sample
 
